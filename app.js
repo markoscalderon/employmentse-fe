@@ -9,6 +9,8 @@ var routes = require('./routes/index');
 
 var app = express();
 
+var json2csv = require('nice-json2csv');
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -23,6 +25,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/bower_components',express.static(path.join(__dirname, 'bower_components')));
 app.use('/geodata',express.static(path.join(__dirname, 'geodata')));
 
+app.use(json2csv.expressDecorator);
 
 app.use('/', routes);
 

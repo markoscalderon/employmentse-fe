@@ -31,7 +31,8 @@ var g = svg.append("g");
 d3.json("/geodata/json/world-110m2.json", function(error, topology) {
 
 // load and display the cities
-d3.csv("/geodata/cities.csv", function(error, data) {
+d3.json("/data/json", function(error, data) {
+  console.log(data);
     g.selectAll("circle")
        .data(data)
        .enter()
@@ -46,8 +47,11 @@ d3.csv("/geodata/cities.csv", function(error, data) {
        .attr("cy", function(d) {
                return projection([d.lon, d.lat])[1];
        })
-       .attr("r", 25)
-       .style("fill", "red");
+       .attr("fill-opacity", 0.5)
+       .attr("r", 3)
+       .style("fill", function(d) {
+          return d.color; 
+       });
 });
 
 
