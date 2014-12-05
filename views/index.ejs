@@ -15,10 +15,15 @@
     <!-- Custom styles for this template -->
     <link href="/stylesheets/style.css" rel="stylesheet">
 
+    <!-- Leaflet styles for the map -->
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+
+    <script src="/bower_components/d3/d3.min.js"></script>
+    <script src="/bower_components/jquery/dist/jquery.js"></script>
+    <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
   </head>
 
   <body>
-
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -45,15 +50,87 @@
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
             <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
-            <li><a href="#">Reports</a></li>
+            <li><a href="http://localhost:8989/solr/collection1/select?q=id%3Ac43d8f10-fd0b-4da3-a745-d87e445508ba&amp;wt=json&amp;indent=true">Reports</a></li>
             <li><a href="#">Analytics</a></li>
             <li><a href="#">Export</a></li>
           </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 class="page-header">Dashboard</h1>
+          <h1 class="page-header">Job Distribution</h1>
+        
+          <div id="map" style="width: 1000px; height: 450px; position: absolute; left: 40px;">      
+            <script>
+
+            var map = L.map('map').setView([-4.46033, -24.14062], 3);
+
+            L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', 
+            {
+             maxZoom: 18,
+             attribution: 
+              'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+              '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+              'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+             id: 
+              'examples.map-i875mjb7'
+            }).addTo(map);
+
+
+            // L.marker([-2.203816, -79.897453]).addTo(map)
+            // .bindPopup("<b>Hello world!</b><br />I am a popup.").openPopup();
+
+            // L.circle([51.508, -0.11], 500, {
+            //  color: 'red',
+            //  fillColor: '#f03',
+            // fillOpacity: 0.5
+            // }).addTo(map).bindPopup("I am a circle.");
+
+            //  L.polygon([
+            // [51.509, -0.08],
+            // [51.503, -0.06],
+            // [51.51, -0.047]
+            // ]).addTo(map).bindPopup("I am a polygon.");
+
+
+            
+
+            function onMapClick(e) 
+            {
+              var popup = L.popup();
+
+              popup
+              .setLatLng(e.latlng)
+              .setContent(e.latlng.toString().substring(6))
+              .openOn(map);
+            }
+
+            function DisplayCircle(lat, lon, color, opac)
+            {
+              L.circle([lat, lon], 500, 
+              {
+               color: color,
+               fillColor: color,
+               fillOpacity: opac
+              }).addTo(map);
+            }
+
+            function VisualizeJob(json, mode)
+            {
+              
+            }
+
+            DisplayCircle(-7.43219, -67.38281, "red", 0.5)
+            DisplayCircle(-14.33252, -46.81641, "blue", 1)
+            map.on('click', onMapClick);
+            </script>
+          </div>
         </div>
+
+
+
+
       </div>
     </div>
+
+    
   </body>
 </html>
