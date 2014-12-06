@@ -103,3 +103,38 @@ body {
   display: inline-block;
   border-radius: 50%;
 }
+
+.timeframe1 {
+  float:left;
+}
+
+.timeframe2 {
+  float:left;
+  padding-left:15px;
+}
+
+path {
+  stroke: white;
+  stroke-width: 0.25px;
+  fill: grey;
+}
+
+#slider9
+{
+  height: 175px;
+  margin-bottom: 25px;
+  margin-left: 35px;
+}
+
+#legend
+{
+  margin-top: 30px;
+  font-size: 11px;
+}
+
+#legend label
+{
+  padding-left: 5px;
+  vertical-align: 4px; 
+}
+
