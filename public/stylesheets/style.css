@@ -103,3 +103,18 @@ body {
   display: inline-block;
   border-radius: 50%;
 }
+
+.timeframe1 {
+  float:left;
+}
+
+.timeframe2 {
+  float:left;
+  padding-left:15px;
+}
+
+path {
+  stroke: white;
+  stroke-width: 0.25px;
+  fill: grey;
+}
